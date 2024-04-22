@@ -1,0 +1,52 @@
+services:
+  mailserver:
+    image: docker.io/mailserver/docker-mailserver:latest
+    container_name: mailserver
+    hostname: mail
+    domainname: next-etl.com
+    env_file: .env
+    ports:
+      - "25:25"    # SMTP  (explicit TLS => STARTTLS)
+      - "143:143"  # IMAP4 (explicit TLS => STARTTLS)
+      - "465:465"  # ESMTP (implicit TLS)
+      - "587:587"  # ESMTP (explicit TLS => STARTTLS)
+      - "993:993"  # IMAP4 (implicit TLS)
+    volumes:
+      - ./src/data/dms/mail-data/:/var/mail/
+      - ./src/data/dms/mail-state/:/var/mail-state/
+      - ./src/data/dms/mail-logs/:/var/log/mail/
+      - ./src/data/dms/config/:/tmp/docker-mailserver/
+      - ./src/data/letsencrypt:/etc/letsencrypt
+      - ./src/config/10-custom.conf:/etc/dovecot/conf.d/10-custom.conf
+      - ./src/certs/:/certs
+      - /etc/localtime:/etc/localtime:ro
+    restart: always
+    stop_grace_period: 1m
+    cap_add:
+      - NET_ADMIN
+    healthcheck:
+      test: "ss --listening --tcp | grep -P 'LISTEN.+:smtp' || exit 1"
+      timeout: 3s
+      retries: 2
+    networks:
+      - mail-network
+      - traefik-network
+
+  certbot:
+    image: certbot/certbot:latest
+    container_name: certbot
+    ports:
+      - "80:80"
+    volumes: 
+      - ./src/data/letsencrypt:/etc/letsencrypt
+      - ./src/data/certbot/logs:/var/log/letsencrypt/
+    command: certonly --standalone --force-renewal --email amirtaherkhani@outlook.com -d mail.next-etl.com --agree-tos
+    networks:
+      - mail-network
+    
+networks:
+  traefik-network:
+    external: true
+  mail-network:
+    external: false
+    name: mail-network
