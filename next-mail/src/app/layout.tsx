@@ -2,7 +2,9 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { cn } from "@/lib/utils";
-const fontSans  = Inter({ subsets: ["latin"] , variable: "--font-sans"});
+import { SpeedInsights } from "@vercel/speed-insights/next";
+
+const fontSans = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,12 +18,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-        <body
+      <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
           fontSans.variable
         )}
-      >{children}</body>
+      >{children}
+        <SpeedInsights />
+      </body>
     </html>
   );
 }
