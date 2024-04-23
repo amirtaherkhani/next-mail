@@ -134,3 +134,4 @@ dist
 # project files
 core/src/data
 core/src/certs/*.pem
+.vercel
