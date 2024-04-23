@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { cn } from "@/lib/utils";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from '@vercel/analytics/react';
+
 
 const fontSans = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -25,6 +27,7 @@ export default function RootLayout({
         )}
       >{children}
         <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
