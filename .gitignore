@@ -135,3 +135,4 @@ dist
 core/src/data
 core/src/certs/*.pem
 .vercel
+.env*.local
