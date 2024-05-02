@@ -1,0 +1,13 @@
+{
+    "verbose": true,
+    "ignore": [
+        "node_modules",
+        ".next",
+        ".vercel"
+    ],
+    "watch": [
+        "./src/*",
+        "./public/*"
+    ],
+    "ext": "js json"
+}
