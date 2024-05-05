@@ -1,6 +1,6 @@
 "use client"
 
-import Home from "@/components/ui/home"
+import Home from "@/components/mailbox/home"
 
 
 export default function home() {

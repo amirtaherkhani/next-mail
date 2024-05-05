@@ -9,14 +9,15 @@ import { Button } from "@/components/ui/button"
 import { DrawerTrigger, DrawerContent, Drawer } from "@/components/ui/drawer"
 import { Badge } from "@/components/ui/badge"
 import { CardTitle, CardDescription, CardHeader, CardContent, Card } from "@/components/ui/card"
-
+import { NavMenu } from "@/components/pages/landing-page/navbar/nav-menu"
+import { Icons } from "@/components/ui/icons"
 export default function Navbar() {
   return (
     <>
       <header className="fixed top-0 z-50 w-full bg-white/60 backdrop-blur-md dark:bg-gray-950/60">
         <div className="container mx-auto flex h-16 items-center px-4 md:px-6">
           <Link className="flex items-center gap-2" href="#">
-            <MountainIcon className="h-6 w-6" />
+            <Icons.mail className="h-5 w-5" />
             <span className="text-xlg font-bold">
               Next
               <span className="text-lg font-semibold">.mail</span>
@@ -47,6 +48,7 @@ export default function Navbar() {
             >
               Contact
             </Link>
+            <NavMenu></NavMenu>
           </nav>
           <div className="ml-auto flex items-center gap-2">
             <form className="flex-1 hidden md:flex">
@@ -159,6 +161,7 @@ export default function Navbar() {
                 Next.mail offers a range of powerful features to help you manage your emails with ease.
               </p>
             </div>
+
             <div className="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-3 lg:gap-12">
               <div className="flex flex-col justify-center space-y-4">
                 <div className="grid gap-1">
