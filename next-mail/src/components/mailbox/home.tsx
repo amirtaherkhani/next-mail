@@ -48,6 +48,14 @@ import {
     Users,
 } from "lucide-react"
 
+
+import {
+    Avatar,
+    AvatarFallback,
+    AvatarImage,
+} from "@/components/ui/avatar"
+
+
 export default function Home() {
     const [activeTab, setActiveTab] = useState('all');
     const handleTabChange = (value: string) => { setActiveTab(value); }
@@ -202,9 +210,9 @@ export default function Home() {
                 <ResizableHandle withHandle />
                 <ResizablePanel className="border-2 border-zinc-200 dark:border-zinc-700" defaultSize={20}>
                     <div className="flex flex-col  items-start h-full w-full">
-                        <div className="flex-none h-16">
-                            <div className="flex  items-center flex-row w-full h-full">
-                                <div className="flex-initial pl-2 pt-5 w-45 h-full">
+                        <div className="flex-none h-16 w-full">
+                            <div className="flex justify-between items-center h-full">
+                                <div className="flex w-50 items-center ml-1">
                                     <TooltipProvider>
                                         <Tooltip>
                                             <TooltipTrigger asChild>
@@ -241,7 +249,7 @@ export default function Home() {
                                             </TooltipContent>
                                         </Tooltip>
                                     </TooltipProvider>
-
+                                    <Separator className="w-[2px] h-5 mr-1 ml-1" orientation="vertical" />
                                     <TooltipProvider>
                                         <Tooltip>
                                             <TooltipTrigger asChild>
@@ -254,151 +262,199 @@ export default function Home() {
                                             </TooltipContent>
                                         </Tooltip>
                                     </TooltipProvider>
+
                                 </div>
 
-                                <div className="flex-initial items-end w-65 h-full">
-                                    <div className="flex-initial pl-0 pt-5 w-80 h-full">
-                                        <TooltipProvider>
-                                            <Tooltip>
-                                                <TooltipTrigger asChild>
-                                                    <Button className="border-none" variant="outline" size="icon">
-                                                        <i className="fi fi-ss-box"></i>
-                                                    </Button>
-                                                </TooltipTrigger>
-                                                <TooltipContent className="bg-zinc-900 text-zinc-200">
-                                                    <p>Archive</p>
-                                                </TooltipContent>
-                                            </Tooltip>
-                                        </TooltipProvider>
-                                        <TooltipProvider>
-                                            <Tooltip>
-                                                <TooltipTrigger asChild>
-                                                    <Button className="border-none" variant="outline" size="icon">
-                                                        <i className="fi fi-ss-box"></i>
-                                                    </Button>
-                                                </TooltipTrigger>
-                                                <TooltipContent className="bg-zinc-900 text-zinc-200">
-                                                    <p>Move to junk</p>
-                                                </TooltipContent>
-                                            </Tooltip>
-                                        </TooltipProvider>
-                                        <TooltipProvider>
-                                            <Tooltip>
-                                                <TooltipTrigger asChild>
-                                                    <Button className="border-none" variant="outline" size="icon">
-                                                        <i className="fi fi-ss-trash h-5 w-5 "></i>
-                                                    </Button>
-                                                </TooltipTrigger>
-                                                <TooltipContent className="bg-zinc-900 text-zinc-200 h-full">
-                                                    <p>Move to trash</p>
-                                                </TooltipContent>
-                                            </Tooltip>
-                                        </TooltipProvider>
-                                        <DropdownMenu>
-                                            <DropdownMenuTrigger asChild>
-                                                <Button className="border-none" variant="outline" size="icon">
-                                                    <i className="fi fi-bs-menu-dots-vertical h-5 w-5"></i>
-                                                </Button>
-                                            </DropdownMenuTrigger>
-                                            <DropdownMenuContent className="w-56">
-                                                <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                                                <DropdownMenuSeparator />
-                                                <DropdownMenuGroup>
-                                                    <DropdownMenuItem>
-                                                        <User className="mr-2 h-4 w-4" />
-                                                        <span>Profile</span>
-                                                        <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
-                                                    </DropdownMenuItem>
-                                                    <DropdownMenuItem>
-                                                        <CreditCard className="mr-2 h-4 w-4" />
-                                                        <span>Billing</span>
-                                                        <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-                                                    </DropdownMenuItem>
-                                                    <DropdownMenuItem>
-                                                        <Settings className="mr-2 h-4 w-4" />
-                                                        <span>Settings</span>
-                                                        <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
-                                                    </DropdownMenuItem>
-                                                    <DropdownMenuItem>
-                                                        <Keyboard className="mr-2 h-4 w-4" />
-                                                        <span>Keyboard shortcuts</span>
-                                                        <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
-                                                    </DropdownMenuItem>
-                                                </DropdownMenuGroup>
-                                                <DropdownMenuSeparator />
-                                                <DropdownMenuGroup>
-                                                    <DropdownMenuItem>
-                                                        <Users className="mr-2 h-4 w-4" />
-                                                        <span>Team</span>
-                                                    </DropdownMenuItem>
-                                                    <DropdownMenuSub>
-                                                        <DropdownMenuSubTrigger>
-                                                            <UserPlus className="mr-2 h-4 w-4" />
-                                                            <span>Invite users</span>
-                                                        </DropdownMenuSubTrigger>
-                                                        <DropdownMenuPortal>
-                                                            <DropdownMenuSubContent>
-                                                                <DropdownMenuItem>
-                                                                    <Mail className="mr-2 h-4 w-4" />
-                                                                    <span>Email</span>
-                                                                </DropdownMenuItem>
-                                                                <DropdownMenuItem>
-                                                                    <MessageSquare className="mr-2 h-4 w-4" />
-                                                                    <span>Message</span>
-                                                                </DropdownMenuItem>
-                                                                <DropdownMenuSeparator />
-                                                                <DropdownMenuItem>
-                                                                    <PlusCircle className="mr-2 h-4 w-4" />
-                                                                    <span>More...</span>
-                                                                </DropdownMenuItem>
-                                                            </DropdownMenuSubContent>
-                                                        </DropdownMenuPortal>
-                                                    </DropdownMenuSub>
-                                                    <DropdownMenuItem>
-                                                        <Plus className="mr-2 h-4 w-4" />
-                                                        <span>New Team</span>
-                                                        <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut>
-                                                    </DropdownMenuItem>
-                                                </DropdownMenuGroup>
-                                                <DropdownMenuSeparator />
-                                                <DropdownMenuItem>
-                                                    <Github className="mr-2 h-4 w-4" />
-                                                    <span>GitHub</span>
-                                                </DropdownMenuItem>
-                                                <DropdownMenuItem>
-                                                    <LifeBuoy className="mr-2 h-4 w-4" />
-                                                    <span>Support</span>
-                                                </DropdownMenuItem>
-                                                <DropdownMenuItem disabled>
-                                                    <Cloud className="mr-2 h-4 w-4" />
-                                                    <span>API</span>
-                                                </DropdownMenuItem>
-                                                <DropdownMenuSeparator />
-                                                <DropdownMenuItem>
-                                                    <LogOut className="mr-2 h-4 w-4" />
-                                                    <span>Log out</span>
-                                                    <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
-                                                </DropdownMenuItem>
-                                            </DropdownMenuContent>
-                                        </DropdownMenu>
-                                    </div>
+                                <div className="flex w-10 ">
+                                    {/* SPACE BODY*/}
+                                </div>
 
+
+                                <div className="flex w-50 items-center mr-2">
+                                    <TooltipProvider>
+                                        <Tooltip>
+                                            <TooltipTrigger asChild>
+                                                <Button className="border-none" variant="outline" size="icon">
+                                                    <i className="fi fi-ss-box"></i>
+                                                </Button>
+                                            </TooltipTrigger>
+                                            <TooltipContent className="bg-zinc-900 text-zinc-200">
+                                                <p>Archive</p>
+                                            </TooltipContent>
+                                        </Tooltip>
+                                    </TooltipProvider>
+                                    <TooltipProvider>
+                                        <Tooltip>
+                                            <TooltipTrigger asChild>
+                                                <Button className="border-none" variant="outline" size="icon">
+                                                    <i className="fi fi-ss-box"></i>
+                                                </Button>
+                                            </TooltipTrigger>
+                                            <TooltipContent className="bg-zinc-900 text-zinc-200">
+                                                <p>Move to junk</p>
+                                            </TooltipContent>
+                                        </Tooltip>
+                                    </TooltipProvider>
+                                    <TooltipProvider>
+                                        <Tooltip>
+                                            <TooltipTrigger asChild>
+                                                <Button className="border-none" variant="outline" size="icon">
+                                                    <i className="fi fi-ss-trash h-5 w-5 "></i>
+                                                </Button>
+                                            </TooltipTrigger>
+                                            <TooltipContent className="bg-zinc-900 text-zinc-200 h-full">
+                                                <p>Move to trash</p>
+                                            </TooltipContent>
+                                        </Tooltip>
+                                    </TooltipProvider>
+                                    <Separator className="w-[2px] h-5 mr-1 ml-1" orientation="vertical" />
+                                    <DropdownMenu>
+                                        <DropdownMenuTrigger asChild>
+                                            <Button className="border-none" variant="outline" size="icon">
+                                                <i className="fi fi-bs-menu-dots-vertical h-5 w-5"></i>
+                                            </Button>
+                                        </DropdownMenuTrigger>
+                                        <DropdownMenuContent className="w-56">
+                                            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                                            <DropdownMenuSeparator />
+                                            <DropdownMenuGroup>
+                                                <DropdownMenuItem>
+                                                    <User className="mr-2 h-4 w-4" />
+                                                    <span>Profile</span>
+                                                    <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+                                                </DropdownMenuItem>
+                                                <DropdownMenuItem>
+                                                    <CreditCard className="mr-2 h-4 w-4" />
+                                                    <span>Billing</span>
+                                                    <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+                                                </DropdownMenuItem>
+                                                <DropdownMenuItem>
+                                                    <Settings className="mr-2 h-4 w-4" />
+                                                    <span>Settings</span>
+                                                    <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+                                                </DropdownMenuItem>
+                                                <DropdownMenuItem>
+                                                    <Keyboard className="mr-2 h-4 w-4" />
+                                                    <span>Keyboard shortcuts</span>
+                                                    <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
+                                                </DropdownMenuItem>
+                                            </DropdownMenuGroup>
+                                            <DropdownMenuSeparator />
+                                            <DropdownMenuGroup>
+                                                <DropdownMenuItem>
+                                                    <Users className="mr-2 h-4 w-4" />
+                                                    <span>Team</span>
+                                                </DropdownMenuItem>
+                                                <DropdownMenuSub>
+                                                    <DropdownMenuSubTrigger>
+                                                        <UserPlus className="mr-2 h-4 w-4" />
+                                                        <span>Invite users</span>
+                                                    </DropdownMenuSubTrigger>
+                                                    <DropdownMenuPortal>
+                                                        <DropdownMenuSubContent>
+                                                            <DropdownMenuItem>
+                                                                <Mail className="mr-2 h-4 w-4" />
+                                                                <span>Email</span>
+                                                            </DropdownMenuItem>
+                                                            <DropdownMenuItem>
+                                                                <MessageSquare className="mr-2 h-4 w-4" />
+                                                                <span>Message</span>
+                                                            </DropdownMenuItem>
+                                                            <DropdownMenuSeparator />
+                                                            <DropdownMenuItem>
+                                                                <PlusCircle className="mr-2 h-4 w-4" />
+                                                                <span>More...</span>
+                                                            </DropdownMenuItem>
+                                                        </DropdownMenuSubContent>
+                                                    </DropdownMenuPortal>
+                                                </DropdownMenuSub>
+                                                <DropdownMenuItem>
+                                                    <Plus className="mr-2 h-4 w-4" />
+                                                    <span>New Team</span>
+                                                    <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut>
+                                                </DropdownMenuItem>
+                                            </DropdownMenuGroup>
+                                            <DropdownMenuSeparator />
+                                            <DropdownMenuItem>
+                                                <Github className="mr-2 h-4 w-4" />
+                                                <span>GitHub</span>
+                                            </DropdownMenuItem>
+                                            <DropdownMenuItem>
+                                                <LifeBuoy className="mr-2 h-4 w-4" />
+                                                <span>Support</span>
+                                            </DropdownMenuItem>
+                                            <DropdownMenuItem disabled>
+                                                <Cloud className="mr-2 h-4 w-4" />
+                                                <span>API</span>
+                                            </DropdownMenuItem>
+                                            <DropdownMenuSeparator />
+                                            <DropdownMenuItem>
+                                                <LogOut className="mr-2 h-4 w-4" />
+                                                <span>Log out</span>
+                                                <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+                                            </DropdownMenuItem>
+                                        </DropdownMenuContent>
+                                    </DropdownMenu>
                                 </div>
                             </div>
                         </div>
                         <Separator className="border border-gray-200" />
                         <div className="flex-1">
-                            02
+
+                            <div className="flex flex-col w-full">
+                                <div className="flex justify-between items-center h-full p-5">
+
+                                    <div className="flex-auto w-10 ml-4 mr-4 items-center">
+                                        <Avatar>
+                                            <AvatarImage src="" alt="@shadcn" />
+                                            <AvatarFallback>CN</AvatarFallback>
+                                        </Avatar>
+                                    </div>
+
+                                    <div className="flex-grow">
+                                        <article>
+                                            <p className="text-lg font-bold">William Smith</p>
+                                            <p className="text-xs font-semibold">Meeting Tomorrow</p>
+                                            <p className="text-xs font-medium">
+                                                <p className="font-bold text-xs">Reply-To:</p>williamsmith@example.com</p>
+                                        </article>
+                                    </div>
+
+                                    <div className="flex-auto w-30 flex justify-end items-start ">
+                                        <p className="text-xs font-normal">Oct 22, 2023, 9:00:00 AM</p>
+                                    </div>
+                                </div>
+
+                                {/*<div className="flex h-32">
+
+                                    <div className="flex flex-row items-center justify-between">
+                                        <div className="flex w-20 ml-4">
+                                            <Avatar>
+                                                <AvatarImage src="" alt="@shadcn" />
+                                                <AvatarFallback>CN</AvatarFallback>
+                                            </Avatar>
+                                        </div>
+                                        <div className="flex-1 ml-4">
+                                            <article>
+                                                <p className="text-lg font-bold">William Smith</p>
+                                                <p className="text-xs font-semibold">Meeting Tomorrow</p>
+                                                <p className="text-xs font-medium">
+                                                    <p className="font-bold text-xs">Reply-To:</p>williamsmith@example.com</p>
+                                            </article>
+                                        </div>
+                                        <div className="flex-1">  </div>
+                                        <div className="flex w-20 items-end"> 03</div>
+                                    </div>
+                                </div>*/}
+                                <Separator className="border border-gray-200" />
+                                <div className="flex-1">02</div>
+                            </div>
                         </div>
+                        <Separator className="border border-gray-200" />
                         <div className="flex-none h-32">
                             03
                         </div>
                     </div>
-
-
-
-
-
                 </ResizablePanel>
             </ResizablePanelGroup>
         </div >
