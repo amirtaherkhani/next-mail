@@ -400,19 +400,14 @@ export default function Home() {
                         </div>
                         <Separator className="border border-gray-200" />
                         <div className="flex-1">
-
                             <div className="flex flex-col w-full">
-                                <div className="flex justify-between items-center h-full p-5">
-
-                                    <div className="flex-auto w-10 ml-4 mr-4 items-center">
-                                        <Avatar>
+                                <div className="grid grid-cols-2 gap-4 place-content-between h-28 justify-items-end">
+                                    <div className="flex m-4 items-center ">
+                                        <Avatar className="mr-5">
                                             <AvatarImage src="" alt="@shadcn" />
                                             <AvatarFallback>CN</AvatarFallback>
                                         </Avatar>
-                                    </div>
-
-                                    <div className="flex-grow">
-                                        <article>
+                                        <article className="flex-1" >
                                             <p className="text-lg font-bold">William Smith</p>
                                             <p className="text-xs font-semibold">Meeting Tomorrow</p>
                                             <p className="text-xs font-medium">
@@ -420,34 +415,25 @@ export default function Home() {
                                         </article>
                                     </div>
 
-                                    <div className="flex-auto w-30 flex justify-end items-start ">
-                                        <p className="text-xs font-normal">Oct 22, 2023, 9:00:00 AM</p>
+                                    <div>
+                                        <div className="w-22 items-end ml-auto mt-4 mr-2">
+                                            <p className="text-xs font-normal">Oct 22, 2023, 9:00:00 AM</p>
+                                        </div>
                                     </div>
+
                                 </div>
 
-                                {/*<div className="flex h-32">
-
-                                    <div className="flex flex-row items-center justify-between">
-                                        <div className="flex w-20 ml-4">
-                                            <Avatar>
-                                                <AvatarImage src="" alt="@shadcn" />
-                                                <AvatarFallback>CN</AvatarFallback>
-                                            </Avatar>
-                                        </div>
-                                        <div className="flex-1 ml-4">
-                                            <article>
-                                                <p className="text-lg font-bold">William Smith</p>
-                                                <p className="text-xs font-semibold">Meeting Tomorrow</p>
-                                                <p className="text-xs font-medium">
-                                                    <p className="font-bold text-xs">Reply-To:</p>williamsmith@example.com</p>
-                                            </article>
-                                        </div>
-                                        <div className="flex-1">  </div>
-                                        <div className="flex w-20 items-end"> 03</div>
-                                    </div>
-                                </div>*/}
                                 <Separator className="border border-gray-200" />
-                                <div className="flex-1">02</div>
+                                <div className="flex-1">
+                                    <div className="w-3/4">
+                                        <div className="whitespace-pre-wrap text-pretty">Hey everyone!
+
+                                            It's almost 2022       and we still don't know if there       is aliens living among us, or do we? Maybe the person writing this is an alien.
+
+                                            You will never know.
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <Separator className="border border-gray-200" />
