@@ -1,8 +1,4 @@
-/**
- * v0 by Vercel.
- * @see https://v0.dev/t/GHclvTcC3mt
- * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
- */
+"use client"
 import { Button } from "@/components/ui/button"
 import { PopoverTrigger, PopoverContent, Popover } from "@/components/ui/popover"
 import { Separator } from "@/components/ui/separator"
@@ -47,7 +43,7 @@ import {
     UserPlus,
     Users,
 } from "lucide-react"
-
+import { Textarea } from "@/components/ui/textarea"
 
 import {
     Avatar,
@@ -55,6 +51,8 @@ import {
     AvatarImage,
 } from "@/components/ui/avatar"
 
+import { Label } from "@/components/ui/label"
+import { Switch } from "@/components/ui/switch"
 
 export default function Home() {
     const [activeTab, setActiveTab] = useState('all');
@@ -208,7 +206,7 @@ export default function Home() {
                     </div>
                 </ResizablePanel>
                 <ResizableHandle withHandle />
-                <ResizablePanel className="border-2 border-zinc-200 dark:border-zinc-700" defaultSize={20}>
+                <ResizablePanel className="border-2 border-zinc-200 dark:border-zinc-700" defaultSize={60}>
                     <div className="flex flex-col  items-start h-full w-full">
                         <div className="flex-none h-16 w-full">
                             <div className="flex justify-between items-center h-full">
@@ -399,46 +397,88 @@ export default function Home() {
                             </div>
                         </div>
                         <Separator className="border border-gray-200" />
-                        <div className="flex-1">
+                        <div className="flex-1 w-full">
                             <div className="flex flex-col w-full">
-                                <div className="grid grid-cols-2 gap-4 place-content-between h-28 justify-items-end">
-                                    <div className="flex m-4 items-center ">
-                                        <Avatar className="mr-5">
+                                <div className="flex justify-between items-center  h-full pt-5 pb-5">
+                                    <div className="flex w-30 items-center ml-4">
+                                        <Avatar >
                                             <AvatarImage src="" alt="@shadcn" />
                                             <AvatarFallback>CN</AvatarFallback>
                                         </Avatar>
-                                        <article className="flex-1" >
+                                        <article className="ml-4" >
                                             <p className="text-lg font-bold">William Smith</p>
                                             <p className="text-xs font-semibold">Meeting Tomorrow</p>
+                                            <p className="font-bold text-xs">Reply-To:
+                                            </p>
                                             <p className="text-xs font-medium">
-                                                <p className="font-bold text-xs">Reply-To:</p>williamsmith@example.com</p>
+                                                williamsmith@example.com
+                                            </p>
                                         </article>
                                     </div>
-
-                                    <div>
-                                        <div className="w-22 items-end ml-auto mt-4 mr-2">
-                                            <p className="text-xs font-normal">Oct 22, 2023, 9:00:00 AM</p>
-                                        </div>
+                                    <div className="flex w-50 ">
+                                        {/* SPACE BODY*/}
                                     </div>
-
+                                    <div className="flex w-30 items-cenetr mr-5 mt-[-50px]">
+                                        <p className="text-xs font-semibold m:px-6 sm:py-4 sm:text-sm">Oct 22, 2023, 9:00:00 AM</p>
+                                    </div>
                                 </div>
 
-                                <Separator className="border border-gray-200" />
-                                <div className="flex-1">
-                                    <div className="w-3/4">
-                                        <div className="whitespace-pre-wrap text-pretty">Hey everyone!
+                                <Separator className="border border-gray-200 w-full" />
+                                <div className="flex-1 w-full">
+                                    <ScrollArea className="h-[640px] w-full border-none rounded-md border p-4">
+                                        Jokester began sneaking into the castle in the middle of the night and leaving
+                                        jokes all over the place: under the king's pillow, in his soup, even in the
+                                        royal toilet. The king was furious, but he couldn't seem to stop Jokester. And
+                                        then, one day, the people of the kingdom discovered that the jokes left by
+                                        Jokester were so funny that they couldn't help but laugh. And once they
+                                        started laughing, they couldn't stop.
+                                        Jokester began sneaking into the castle in the middle of the night and leaving
+                                        jokes all over the place: under the king's pillow, in his soup, even in the
+                                        royal toilet. The king was furious, but he couldn't seem to stop Jokester. And
+                                        then, one day, the people of the kingdom discovered that the jokes left by
+                                        Jokester were so funny that they couldn't help but laugh. And once they
+                                        started laughing, they couldn't stop.
+                                        Jokester began sneaking into the castle in the middle of the night and leaving
+                                        jokes all over the place: under the king's pillow, in his soup, even in the
+                                        royal toilet. The king was furious, but he couldn't seem to stop Jokester. And
+                                        then, one day, the people of the kingdom discovered that the jokes left by
+                                        Jokester were so funny that they couldn't help but laugh. And once they
+                                        started laughing, they couldn't stop.
+                                        Jokester began sneaking into the castle in the middle of the night and leaving
+                                        jokes all over the place: under the king's pillow, in his soup, even in the
+                                        royal toilet. The king was furious, but he couldn't seem to stop Jokester. And
+                                        then, one day, the people of the kingdom discovered that the jokes left by
+                                        Jokester were so funny that they couldn't help but laugh. And once they
+                                        started laughing, they couldn't stop.
+                                        Jokester began sneaking into the castle in the middle of the night and leaving
+                                        jokes all over the place: under the king's pillow, in his soup, even in the
+                                        royal toilet. The king was furious, but he couldn't seem to stop Jokester. And
+                                        then, one day, the people of the kingdom discovered that the jokes left by
+                                        Jokester were so funny that they couldn't help but laugh. And once they
+                                        started laughing, they couldn't stop.
+                                    </ScrollArea>
 
-                                            It's almost 2022       and we still don't know if there       is aliens living among us, or do we? Maybe the person writing this is an alien.
-
-                                            You will never know.
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
                         <Separator className="border border-gray-200" />
-                        <div className="flex-none h-32">
-                            03
+                        <div className="flex-none h-50 w-full p-5 pt-2">
+                            <Textarea className="w-full mt-4 mb-4" placeholder="Type your message here." />
+                            <div className="flex justify-between items-center h-full">
+                                <div className="flex w-30 space-x-2 h-full">
+                                    <Switch id="mute" />
+                                    <Label className="mt-1" htmlFor="mute">Mute this thread</Label>
+                                </div>
+                                <div className="flex flex-50 h-full">
+                                    {/* SPACE BODY*/}
+
+                                </div>
+                                <div className="flex w-20 h-full ">
+                                    <Button>
+                                        <i className="mr-2 h-4 w-4 fi fi-ss-paper-plane" /> Send
+                                    </Button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </ResizablePanel>
@@ -457,7 +497,7 @@ function CheckIcon(props) {
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            strokeWidth="2"
+            strokeWid th="2"
             strokeLinecap="round"
             strokeLinejoin="round"
         >
