@@ -5,6 +5,8 @@ import { Separator } from "@/components/ui/separator"
 import { ResizablePanel, ResizableHandle, ResizablePanelGroup } from "@/components/ui/resizable"
 import { TabsTrigger, TabsList, TabsContent, Tabs } from "@/components/ui/tabs"
 import { ScrollArea } from "@/components/ui/scroll-area"
+import { Badge } from "@/components/ui/badge"
+import { Input } from "@/components/ui/input"
 import {
     Tooltip,
     TooltipContent,
@@ -54,12 +56,42 @@ import {
 import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
 
+
+import {
+    ContextMenu,
+    ContextMenuCheckboxItem,
+    ContextMenuContent,
+    ContextMenuItem,
+    ContextMenuLabel,
+    ContextMenuRadioGroup,
+    ContextMenuRadioItem,
+    ContextMenuSeparator,
+    ContextMenuShortcut,
+    ContextMenuSub,
+    ContextMenuSubContent,
+    ContextMenuSubTrigger,
+    ContextMenuTrigger,
+} from "@/components/ui/context-menu"
+
+
+import {
+    Command,
+    CommandEmpty,
+    CommandGroup,
+    CommandInput,
+    CommandItem,
+    CommandList,
+    CommandSeparator,
+    CommandShortcut,
+} from "@/components/ui/command"
+
+
 export default function Home() {
     const [activeTab, setActiveTab] = useState('all');
     const handleTabChange = (value: string) => { setActiveTab(value); }
 
     return (
-        <div key="1" className="flex h-screen w-full">
+        <div className="flex h-screen w-full">
             <ResizablePanelGroup className="w-full" direction="horizontal">
                 <ResizablePanel defaultSize={20}>
                     <div className="flex h-full flex-col bg-white pt-2 border-2 border-zinc-200 dark:bg-zinc-950 dark:border-zinc-700">
@@ -101,16 +133,54 @@ export default function Home() {
                                 </div>
                             </div>
                             <Separator className="border border-gray-200" />
+                            <Command className="rounded-lg border shadow-md">
+                                <CommandInput placeholder="Type a command or search..." />
+                                <CommandList>
+                                    <CommandEmpty>No results found.</CommandEmpty>
+                                    <CommandGroup heading="Suggestions">
+                                        <CommandItem>
+                                            <i className="mr-2 h-4 w-4" />
+                                            <span>Calendar</span>
+                                        </CommandItem>
+                                        <CommandItem>
+                                            <i className="mr-2 h-4 w-4" />
+                                            <span>Search Emoji</span>
+                                        </CommandItem>
+                                        <CommandItem>
+                                            <i className="mr-2 h-4 w-4" />
+                                            <span>Calculator</span>
+                                        </CommandItem>
+                                    </CommandGroup>
+                                    <CommandSeparator />
+                                    <CommandGroup heading="Settings">
+                                        <CommandItem>
+                                            <User className="mr-2 h-4 w-4" />
+                                            <span>Profile</span>
+                                            <CommandShortcut>⌘P</CommandShortcut>
+                                        </CommandItem>
+                                        <CommandItem>
+                                            <CreditCard className="mr-2 h-4 w-4" />
+                                            <span>Billing</span>
+                                            <CommandShortcut>⌘B</CommandShortcut>
+                                        </CommandItem>
+                                        <CommandItem>
+                                            <Settings className="mr-2 h-4 w-4" />
+                                            <span>Settings</span>
+                                            <CommandShortcut>⌘S</CommandShortcut>
+                                        </CommandItem>
+                                    </CommandGroup>
+                                </CommandList>
+                            </Command>
                         </div>
                     </div>
                 </ResizablePanel>
                 <ResizableHandle withHandle />
                 <ResizablePanel defaultSize={60}>
                     <div className="flex h-full flex-col bg-white pt-2 border-2 border-zinc-200 dark:bg-zinc-950 dark:border-zinc-700">
-                        <div className="flex  h-full flex-col bg-white p-0 border-1 border-zinc-200 dark:bg-zinc-950 dark:border-zinc-700">
+                        <div className="flex h-96 flex-col bg-white p-0 border-1 border-zinc-200 dark:bg-zinc-950 dark:border-zinc-700">
                             <Tabs className="flex flex-col" defaultValue="all" onValueChange={handleTabChange}>
                                 <div className="flex items-center p-2">
-                                    <h1 className="text-2xl font-bold pl-2">Inbox</h1>
+                                    <h1 className="text-2xl font-extrabold pl-2">Inbox</h1>
                                     <TabsList className="ml-auto rounded-md">
                                         <TabsTrigger value="all" className={cn(
                                             'text-zinc-600 rounded-lg border-transparent font-semibold dark:text-zinc-200',
@@ -130,12 +200,29 @@ export default function Home() {
                                         )}>
                                             Unread
                                         </TabsTrigger>
+                                        <TabsTrigger value="archive" className={cn(
+                                            'text-zinc-600 rounded-lg border-transparent font-semibold dark:text-zinc-200',
+                                            {
+                                                'border border-lg shadow-md  border-zinc-200': activeTab === 'archive',
+                                                'border-none shadow-none ': activeTab !== 'archive',
+                                            }
+                                        )}>
+                                            Archive
+                                        </TabsTrigger>
                                     </TabsList>
                                 </div>
-                                <Separator className="border border-gray-200" />
-                                <TabsContent className="m-0" value="all">
-                                    <ScrollArea className="p-2">
-                                        <div className="grid gap-2">
+                                <Separator className="border border-gray-200 " />
+                                <div className="relative m-3 items-center w-full">
+                                    <div className="flex w-full items-center space-x-2 pr-5">
+                                        <Input className="border-2 rounded-md w-full" type="email" placeholder="Search Email ..." />
+                                        <Button className="flex justify-center" size="icon" type="submit"><i className="fi fi-br-search w-8 mr-1 h-4  ml-1"></i></Button>
+                                    </div>
+                                </div>
+
+                                <TabsContent className="m-0 flex-1  h-full p-4 space-y-2" value="all">
+
+                                    <ContextMenu>
+                                        <ContextMenuTrigger >
                                             <article className="flex flex-col items-start gap-2 rounded-lg border border-gray-200 p-3 text-left text-sm transition-all hover:bg-gray-100 dark:border-gray-800 dark:hover:bg-gray-800">
                                                 <div className="flex items-center w-full">
                                                     <div className="font-semibold">Emily Davis</div>
@@ -147,10 +234,62 @@ export default function Home() {
                                                     shipped. You can track your order online on our website. Please find the tracking number
                                                     below.
                                                 </div>
+
+
                                             </article>
+                                        </ContextMenuTrigger>
+                                        <ContextMenuContent className="w-64">
+                                            <ContextMenuItem inset>
+                                                Back
+                                                <ContextMenuShortcut>⌘[</ContextMenuShortcut>
+                                            </ContextMenuItem>
+                                            <ContextMenuItem inset disabled>
+                                                Forward
+                                                <ContextMenuShortcut>⌘]</ContextMenuShortcut>
+                                            </ContextMenuItem>
+                                            <ContextMenuItem inset>
+                                                Reload
+                                                <ContextMenuShortcut>⌘R</ContextMenuShortcut>
+                                            </ContextMenuItem>
+                                            <ContextMenuSub>
+                                                <ContextMenuSubTrigger inset>More Tools</ContextMenuSubTrigger>
+                                                <ContextMenuSubContent className="w-48">
+                                                    <ContextMenuItem>
+                                                        Save Page As...
+                                                        <ContextMenuShortcut>⇧⌘S</ContextMenuShortcut>
+                                                    </ContextMenuItem>
+                                                    <ContextMenuItem>Create Shortcut...</ContextMenuItem>
+                                                    <ContextMenuItem>Name Window...</ContextMenuItem>
+                                                    <ContextMenuSeparator />
+                                                    <ContextMenuItem>Developer Tools</ContextMenuItem>
+                                                </ContextMenuSubContent>
+                                            </ContextMenuSub>
+                                            <ContextMenuSeparator />
+                                            <ContextMenuCheckboxItem checked>
+                                                Show Bookmarks Bar
+                                                <ContextMenuShortcut>⌘⇧B</ContextMenuShortcut>
+                                            </ContextMenuCheckboxItem>
+                                            <ContextMenuCheckboxItem>Show Full URLs</ContextMenuCheckboxItem>
+                                            <ContextMenuSeparator />
+                                            <ContextMenuRadioGroup value="pedro">
+                                                <ContextMenuLabel inset>People</ContextMenuLabel>
+                                                <ContextMenuSeparator />
+                                                <ContextMenuRadioItem value="pedro">
+                                                    Pedro Duarte
+                                                </ContextMenuRadioItem>
+                                                <ContextMenuRadioItem value="colm">Colm Tuite</ContextMenuRadioItem>
+                                            </ContextMenuRadioGroup>
+                                        </ContextMenuContent>
+                                    </ContextMenu>
+
                                             <article className="flex flex-col items-start gap-2 rounded-lg border border-gray-200 p-3 text-left text-sm transition-all hover:bg-gray-100 dark:border-gray-800 dark:hover:bg-gray-800">
                                                 <div className="flex items-center w-full">
                                                     <div className="font-semibold">Marketing Team</div>
+                                            <div className="flex items-center justify-between  space-x-2 ml-5">
+                                                <i className="fi fi-rr-envelope-open text-lg text-slate-900"></i>
+                                                <i className="fi fi-rr-envelope-marker text-lg text-slate-900"></i>
+                                                <i className="fi fi-rr-envelope-dot text-lg text-slate-900"></i>
+                                            </div>
                                                     <div className="ml-auto text-xs text-gray-500 dark:text-gray-400">1 hour ago</div>
                                                 </div>
                                                 <div className="text-xs font-medium">New Product Announcement</div>
@@ -158,23 +297,114 @@ export default function Home() {
                                                     Dear valued customer, we are excited to introduce our latest product! Check it out on our
                                                     website now.
                                                 </div>
-                                            </article>
-                                            <article className="flex flex-col items-start gap-2 rounded-lg border border-gray-200 p-3 text-left text-sm transition-all hover:bg-gray-100 dark:border-gray-800 dark:hover:bg-gray-800">
-                                                <div className="flex items-center w-full">
-                                                    <div className="font-semibold">Support Team</div>
-                                                    <div className="ml-auto text-xs text-gray-500 dark:text-gray-400">3 days ago</div>
-                                                </div>
-                                                <div className="text-xs font-medium">Important Update</div>
-                                                <div className="line-clamp-2 text-xs text-gray-500 dark:text-gray-400">
-                                                    Hello, we have important updates regarding your account security. Please review the changes in
-                                                    your dashboard.
-                                                </div>
-                                            </article>
+                                        <div className="flex items-center justify-between mt-2">
+                                            <Badge className="mr-2 rounded-md ">Badge1</Badge>
+                                            <Badge className="mr-2 rounded-md bg-gray-200 " variant="secondary" >Secondary1</Badge>
+                                            <Badge className="mr-2 rounded-md " variant="outline" >Outline1</Badge>
                                         </div>
-                                    </ScrollArea>
+                                    </article>
+
+                                    <article className="flex flex-col items-start gap-2 rounded-lg border border-gray-200 p-3 text-left text-sm transition-all hover:bg-gray-100 dark:border-gray-800 dark:hover:bg-gray-800">
+                                        <div className="flex items-center w-full">
+                                            <div className="font-semibold">Support Team</div>
+                                            <div className="ml-auto text-xs text-gray-500 dark:text-gray-400">3 days ago</div>
+                                        </div>
+                                        <div className="text-xs font-medium">Important Update</div>
+                                        <div className="line-clamp-2 text-xs text-gray-500 dark:text-gray-400">
+                                            Hello, we have important updates regarding your account security. Please review the changes in
+                                            your dashboard.
+                                        </div>
+                                    </article>
+                                    <article className="flex flex-col items-start gap-2 rounded-lg border border-gray-200 p-3 text-left text-sm transition-all hover:bg-gray-100 dark:border-gray-800 dark:hover:bg-gray-800">
+                                        <div className="flex items-center w-full">
+                                            <div className="font-semibold">Support Team</div>
+                                            <div className="ml-auto text-xs text-gray-500 dark:text-gray-400">3 days ago</div>
+                                        </div>
+                                        <div className="text-xs font-medium">Important Update</div>
+                                        <div className="line-clamp-2 text-xs text-gray-500 dark:text-gray-400">
+                                            Hello, we have important updates regarding your account security. Please review the changes in
+                                            your dashboard.
+                                        </div>
+                                    </article>
+                                    <article className="flex flex-col items-start gap-2 rounded-lg border border-gray-200 p-3 text-left text-sm transition-all hover:bg-gray-100 dark:border-gray-800 dark:hover:bg-gray-800">
+                                        <div className="flex items-center w-full">
+                                            <div className="font-semibold">Support Team</div>
+                                            <div className="ml-auto text-xs text-gray-500 dark:text-gray-400">3 days ago</div>
+                                        </div>
+                                        <div className="text-xs font-medium">Important Update</div>
+                                        <div className="line-clamp-2 text-xs text-gray-500 dark:text-gray-400">
+                                            Hello, we have important updates regarding your account security. Please review the changes in
+                                            your dashboard.
+                                        </div>
+                                    </article>
+                                    <article className="flex flex-col items-start gap-2 rounded-lg border border-gray-200 p-3 text-left text-sm transition-all hover:bg-gray-100 dark:border-gray-800 dark:hover:bg-gray-800">
+                                        <div className="flex items-center w-full">
+                                            <div className="font-semibold">Support Team</div>
+                                            <div className="ml-auto text-xs text-gray-500 dark:text-gray-400">3 days ago</div>
+                                        </div>
+                                        <div className="text-xs font-medium">Important Update</div>
+                                        <div className="line-clamp-2 text-xs text-gray-500 dark:text-gray-400">
+                                            Hello, we have important updates regarding your account security. Please review the changes in
+                                            your dashboard.
+                                        </div>
+                                        <div className="flex items-center justify-between mt-2">
+                                            <Badge className="mr-2 rounded-md">Badge</Badge>
+                                            <Badge className="mr-2 rounded-md" variant="secondary">Secondary</Badge>
+                                            <Badge className="mr-2 rounded-md" variant="outline">Outline</Badge>
+                                        </div>
+                                    </article>
+                                    <article className="flex flex-col items-start gap-2 rounded-lg border border-gray-200 p-3 text-left text-sm transition-all hover:bg-gray-100 dark:border-gray-800 dark:hover:bg-gray-800">
+                                        <div className="flex items-center w-full">
+                                            <div className="font-semibold">Support Team</div>
+                                            <div className="ml-auto text-xs text-gray-500 dark:text-gray-400">3 days ago</div>
+                                        </div>
+                                        <div className="text-xs font-medium">Important Update</div>
+                                        <div className="line-clamp-2 text-xs text-gray-500 dark:text-gray-400">
+                                            Hello, we have important updates regarding your account security. Please review the changes in
+                                            your dashboard.
+                                        </div>
+                                    </article>
+                                    <article className="flex flex-col items-start gap-2 rounded-lg border border-gray-200 p-3 text-left text-sm transition-all hover:bg-gray-100 dark:border-gray-800 dark:hover:bg-gray-800">
+                                        <div className="flex items-center w-full">
+                                            <div className="font-semibold">Support Team</div>
+                                            <div className="ml-auto text-xs text-gray-500 dark:text-gray-400">3 days ago</div>
+                                        </div>
+                                        <div className="text-xs font-medium">Important Update</div>
+                                        <div className="line-clamp-2 text-xs text-gray-500 dark:text-gray-400">
+                                            Hello, we have important updates regarding your account security. Please review the changes in
+                                            your dashboard.
+                                        </div>
+                                        <div className="flex items-center justify-between mt-2">
+                                            <Badge className="mr-2 rounded-md">Badge</Badge>
+                                            <Badge className="mr-2 rounded-md" variant="secondary">Secondary</Badge>
+                                            <Badge className="mr-2 rounded-md" variant="outline">Outline</Badge>
+                                        </div>
+                                    </article>
+                                    <article className="flex flex-col items-start gap-2 rounded-lg border border-gray-200 p-3 text-left text-sm transition-all hover:bg-gray-100 dark:border-gray-800 dark:hover:bg-gray-800">
+                                        <div className="flex items-center w-full">
+                                            <div className="font-semibold">Support Team</div>
+                                            <div className="ml-auto text-xs text-gray-500 dark:text-gray-400">3 days ago</div>
+                                        </div>
+                                        <div className="text-xs font-medium">Important Update</div>
+                                        <div className="line-clamp-2 text-xs text-gray-500 dark:text-gray-400">
+                                            Hello, we have important updates regarding your account security. Please review the changes in
+                                            your dashboard.
+                                        </div>
+                                    </article>
+                                    <article className="flex flex-col items-start gap-2 rounded-lg border border-gray-200 p-3 text-left text-sm transition-all hover:bg-gray-100 dark:border-gray-800 dark:hover:bg-gray-800">
+                                        <div className="flex items-center w-full">
+                                            <div className="font-semibold">Support Team</div>
+                                            <div className="ml-auto text-xs text-gray-500 dark:text-gray-400">3 days ago</div>
+                                        </div>
+                                        <div className="text-xs font-medium">Important Update</div>
+                                        <div className="line-clamp-2 text-xs text-gray-500 dark:text-gray-400">
+                                            Hello, we have important updates regarding your account security. Please review the changes in
+                                            your dashboard.
+                                        </div>
+                                    </article>
                                 </TabsContent>
-                                <TabsContent className="m-0" value="unread">
-                                    <ScrollArea className="p-2 grid gap-2">
+                                <TabsContent className="m-0 flex-1  h-full p-4 space-y-2" value="unread">
+
                                         <div className="grid gap-2">
                                             <article className="flex flex-col items-start gap-2 rounded-lg border border-gray-200 p-3 text-left text-sm transition-all hover:bg-gray-100 dark:border-gray-800 dark:hover:bg-gray-800">
                                                 <div className="flex items-center w-full">
@@ -185,6 +415,13 @@ export default function Home() {
                                                 <div className="line-clamp-2 text-xs text-gray-500 dark:text-gray-400">
                                                     Hi there, we'd love to hear your feedback on our services. Please take a moment to fill out
                                                     our survey. Your opinion matters!
+
+                                            </div>
+
+                                            <div className="flex items-center justify-between mt-2">
+                                                <Badge className="mr-2 rounded-md">Badge</Badge>
+                                                <Badge className="mr-2 rounded-md" variant="secondary">Secondary</Badge>
+                                                <Badge className="mr-2 rounded-md" variant="outline">Outline</Badge>
                                                 </div>
                                             </article>
                                             <article className="flex flex-col items-start gap-2 rounded-lg border border-gray-200 p-3 text-left text-sm transition-all hover:bg-gray-100 dark:border-gray-800 dark:hover:bg-gray-800">
@@ -199,7 +436,7 @@ export default function Home() {
                                                 </div>
                                             </article>
                                         </div>
-                                    </ScrollArea>
+
                                 </TabsContent>
                             </Tabs>
                         </div>
@@ -399,7 +636,7 @@ export default function Home() {
                         <Separator className="border border-gray-200" />
                         <div className="flex-1 w-full">
                             <div className="flex flex-col w-full">
-                                <div className="flex justify-between items-center  h-full pt-5 pb-5">
+                                <div className="flex w-full justify-between items-center p-3">
                                     <div className="flex w-30 items-center ml-4">
                                         <Avatar >
                                             <AvatarImage src="" alt="@shadcn" />
@@ -424,8 +661,38 @@ export default function Home() {
                                 </div>
 
                                 <Separator className="border border-gray-200 w-full" />
-                                <div className="flex-1 w-full">
-                                    <ScrollArea className="h-[640px] w-full border-none rounded-md border p-4">
+                                <div className="flex-1 w-full h-96">
+                                    <ScrollArea className="h-96 w-full border-none rounded-md border p-4">
+                                        Jokester began sneaking into the castle in the middle of the night and leaving
+                                        jokes all over the place: under the king's pillow, in his soup, even in the
+                                        royal toilet. The king was furious, but he couldn't seem to stop Jokester. And
+                                        then, one day, the people of the kingdom discovered that the jokes left by
+                                        Jokester were so funny that they couldn't help but laugh. And once they
+                                        started laughing, they couldn't stop.
+                                        Jokester began sneaking into the castle in the middle of the night and leaving
+                                        jokes all over the place: under the king's pillow, in his soup, even in the
+                                        royal toilet. The king was furious, but he couldn't seem to stop Jokester. And
+                                        then, one day, the people of the kingdom discovered that the jokes left by
+                                        Jokester were so funny that they couldn't help but laugh. And once they
+                                        started laughing, they couldn't stop.
+                                        Jokester began sneaking into the castle in the middle of the night and leaving
+                                        jokes all over the place: under the king's pillow, in his soup, even in the
+                                        royal toilet. The king was furious, but he couldn't seem to stop Jokester. And
+                                        then, one day, the people of the kingdom discovered that the jokes left by
+                                        Jokester were so funny that they couldn't help but laugh. And once they
+                                        started laughing, they couldn't stop.
+                                        Jokester began sneaking into the castle in the middle of the night and leaving
+                                        jokes all over the place: under the king's pillow, in his soup, even in the
+                                        royal toilet. The king was furious, but he couldn't seem to stop Jokester. And
+                                        then, one day, the people of the kingdom discovered that the jokes left by
+                                        Jokester were so funny that they couldn't help but laugh. And once they
+                                        started laughing, they couldn't stop.
+                                        Jokester began sneaking into the castle in the middle of the night and leaving
+                                        jokes all over the place: under the king's pillow, in his soup, even in the
+                                        royal toilet. The king was furious, but he couldn't seem to stop Jokester. And
+                                        then, one day, the people of the kingdom discovered that the jokes left by
+                                        Jokester were so funny that they couldn't help but laugh. And once they
+                                        started laughing, they couldn't stop.
                                         Jokester began sneaking into the castle in the middle of the night and leaving
                                         jokes all over the place: under the king's pillow, in his soup, even in the
                                         royal toilet. The king was furious, but he couldn't seem to stop Jokester. And
